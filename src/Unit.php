@@ -1,5 +1,7 @@
 <?php
 namespace Styde;
+use mysql_xdevapi\Exception;
+
 abstract class Unit {
     protected $hp = 40;
     protected $name;
@@ -8,9 +10,10 @@ abstract class Unit {
     protected $weapon;
 
 
-    public function __construct($name,Weapon $weapon=null)
+    public function __construct($name,Weapon $weapon)
     {
         $this->name = $name;
+        $this->weapon = $weapon;
 
 
     }
@@ -23,12 +26,21 @@ abstract class Unit {
     public function setArmor(Armor $armor = null){
         $this->armor = $armor;
     }
+    public function setWeapon(Weapon $weapon){
+        $this->weapon = $weapon;
+    }
 
     public function move($direction){
         show("{$this->name} camina hacia $direction");
     }
 
-    abstract  function attack(Unit $opponent);
+    public function attack(Unit $opponent){
+        if($this->weapon == null){
+            throw new \Exception("The unit has no weapons");
+        }
+        show($this->weapon->getDescription($this,$opponent));
+        $opponent->takeDamage($this->weapon->getDamage());
+    }
     public function takeDamage($damage){
         $this->hp=$this->hp - $this->absorbDamage($damage);
         show("{$this->name} ahora tiene {$this->getHp()} puntos de vida  ");
