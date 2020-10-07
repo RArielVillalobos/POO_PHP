@@ -3,17 +3,25 @@ namespace Styde;
 abstract class Unit {
     protected $hp = 40;
     protected $name;
+    protected $armor;
+    protected $damage;
+    protected $weapon;
 
 
-    public function __construct($name)
+    public function __construct($name,Weapon $weapon=null)
     {
         $this->name = $name;
+
+
     }
     public function getName(){
         return $this->name;
     }
     public function getHp(){
         return $this->hp;
+    }
+    public function setArmor(Armor $armor = null){
+        $this->armor = $armor;
     }
 
     public function move($direction){
@@ -34,6 +42,9 @@ abstract class Unit {
         exit();
     }
     protected function absorbDamage($damage){
+        if($this->armor){
+            $damage = $this->armor->absorbDamage($damage);
+        }
         return $damage;
 
     }

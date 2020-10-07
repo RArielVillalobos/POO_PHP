@@ -1,0 +1,19 @@
+{
+    "name": "styde/oop",
+    "description": "proyecto demo",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ruben Ariel Villalobos",
+            "email": "ariel.villalobos96@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "files": ["src/helpers.php"],
+        "psr-4": {
+            "Styde\\": "src/"
+        }
+    }
+}
