@@ -3,14 +3,10 @@
 namespace Styde\Weapons;
 use Styde\Weapon;
 use Styde\Unit;
-class CrossBow extends Bow
+class CrossBow extends Weapon
 {
 
     protected $damage = 40;
+    protected $description = ':unit dispara una flecha a  :opponent';
 
-    public function getDescription(Unit $attacker,Unit $victim)
-    {
-        // TODO: Implement getDescription() method.
-        return "{$attacker->getName()} ataca a {$victim->getName()}";
-    }
 }

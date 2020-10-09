@@ -1,9 +1,10 @@
 <?php
 namespace Styde\Armors;
 use Styde\Armor;
+use Styde\Attack;
 
 class BronzeArmor implements Armor {
-    public function absorbDamage($damage){
-        return $damage / 2;
+    public function absorbDamage(Attack $attack){
+        return $attack->getDamage() / 2;
     }
 }

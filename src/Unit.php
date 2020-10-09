@@ -2,7 +2,7 @@
 namespace Styde;
 use mysql_xdevapi\Exception;
 
-abstract class Unit {
+class Unit {
     protected $hp = 40;
     protected $name;
     protected $armor;
@@ -35,14 +35,13 @@ abstract class Unit {
     }
 
     public function attack(Unit $opponent){
-        if($this->weapon == null){
-            throw new \Exception("The unit has no weapons");
-        }
-        show($this->weapon->getDescription($this,$opponent));
-        $opponent->takeDamage($this->weapon->getDamage());
+        $attack = $this->weapon->createAttack();
+
+        show($attack->getDescription($this,$opponent));
+        $opponent->takeDamage($attack);
     }
-    public function takeDamage($damage){
-        $this->hp=$this->hp - $this->absorbDamage($damage);
+    public function takeDamage(Attack $attack){
+        $this->hp=$this->hp - $this->absorbDamage($attack);
         show("{$this->name} ahora tiene {$this->getHp()} puntos de vida  ");
 
         if($this->hp <= 0){
@@ -53,11 +52,11 @@ abstract class Unit {
         show("{$this->name} muere");
         exit();
     }
-    protected function absorbDamage($damage){
+    protected function absorbDamage(Attack $attack){
         if($this->armor){
-            $damage = $this->armor->absorbDamage($damage);
+           return  $this->armor->absorbDamage($attack);
         }
-        return $damage;
+        return $attack->getDamage();
 
     }
 

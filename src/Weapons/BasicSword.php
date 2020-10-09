@@ -7,6 +7,7 @@ class BasicSword extends Weapon
 {
 
     protected $damage = 20;
+    protected $description = ':unit ataca con la espalda a :opponent';
 
     public function getDescription(Unit $attacker,Unit $victim)
     {
