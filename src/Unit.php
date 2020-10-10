@@ -1,6 +1,7 @@
 <?php
 namespace Styde;
-use mysql_xdevapi\Exception;
+use Exception;
+use Styde\Armors\MissingArmor;
 
 class Unit {
     protected $hp = 40;
@@ -14,6 +15,7 @@ class Unit {
     {
         $this->name = $name;
         $this->weapon = $weapon;
+        $this->armor = new MissingArmor();
 
 
     }
@@ -41,7 +43,7 @@ class Unit {
         $opponent->takeDamage($attack);
     }
     public function takeDamage(Attack $attack){
-        $this->hp=$this->hp - $this->absorbDamage($attack);
+        $this->hp=$this->hp - $this->armor->absorbDamage($attack);
         show("{$this->name} ahora tiene {$this->getHp()} puntos de vida  ");
 
         if($this->hp <= 0){
@@ -52,13 +54,7 @@ class Unit {
         show("{$this->name} muere");
         exit();
     }
-    protected function absorbDamage(Attack $attack){
-        if($this->armor){
-           return  $this->armor->absorbDamage($attack);
-        }
-        return $attack->getDamage();
 
-    }
 
 
 }
