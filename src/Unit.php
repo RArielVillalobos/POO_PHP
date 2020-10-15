@@ -19,6 +19,14 @@ class Unit {
 
 
     }
+    //metodo factory
+    //lo hacemos estatico para no tener que instanciar la clase unit
+    public static function createSoldier(){
+        $soldier = new Unit("soldier",new Weapons\BasicBow);
+        $soldier->setArmor(new Armors\BronzeArmor());
+        return $soldier;
+
+    }
     public function getName(){
         return $this->name;
     }
@@ -27,9 +35,14 @@ class Unit {
     }
     public function setArmor(Armor $armor = null){
         $this->armor = $armor;
+        return $this;
     }
     public function setWeapon(Weapon $weapon){
         $this->weapon = $weapon;
+        return $this;
+    }
+    public function setShield(){
+        return $this;
     }
 
     public function move($direction){
