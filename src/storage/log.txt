@@ -1,0 +1,5 @@
+(2020-10-15 06:10:04)soldier dispara una flecha a archer
+(2020-10-15 06:10:04)archer ahora tiene 20 puntos de vida  
+(2020-10-15 06:10:04)archer dispara una flecha a  soldier
+(2020-10-15 06:10:04)soldier ahora tiene 0 puntos de vida  
+(2020-10-15 06:10:04)soldier muere

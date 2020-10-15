@@ -7,6 +7,8 @@ Translator::set([
     'CrossBowAttack'=>':unit dispara una flecha a  :opponent',
     'FireBowAttack' =>':unit dispara una flecha de fuego a :opponent'
 ]);
+$logger = new HtmlLogger();
+log::setLogger($logger);
 //constructor con un nombre
 $soldier = Unit::createSoldier()
                 ->setWeapon(new Weapons\BasicBow())
