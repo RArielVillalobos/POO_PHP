@@ -4,6 +4,7 @@ use Exception;
 use Styde\Armors\MissingArmor;
 
 class Unit {
+    const MAX_DAMAGE = 2300;
     protected $hp = 40;
     protected $name;
     protected $armor;
@@ -58,12 +59,21 @@ class Unit {
         $opponent->takeDamage($attack);
     }
     public function takeDamage(Attack $attack){
-        $this->hp=$this->hp - $this->armor->absorbDamage($attack);
+
+        $this->setHp(
+            $this->armor->absorbDamage($attack)
+        );
         log::info("{$this->name} ahora tiene {$this->getHp()} puntos de vida  ");
 
         if($this->hp <= 0){
             $this->die();
         }
+    }
+    protected function setHp($damage){
+        if($damage > static::MAX_DAMAGE){
+            $damage = static::MAX_DAMAGE;
+        }
+        $this->hp=$this->hp - $damage;
     }
     public function die(){
         log::info("{$this->name} muere");
